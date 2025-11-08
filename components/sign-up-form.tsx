@@ -21,6 +21,7 @@ export function SignUpForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("");
+  const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -45,6 +46,9 @@ export function SignUpForm({
         password,
         options: {
           emailRedirectTo: `${window.location.origin}/protected`,
+          data: {
+            fullname,
+          }
         },
       });
       if (error) throw error;
@@ -75,6 +79,18 @@ export function SignUpForm({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="fullname">fullname</Label>
+                </div>
+                <Input
+                  id="fullname"
+                  type="fullname"
+                  required
+                  value={fullname}
+                  onChange={(e) => setFullname(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
