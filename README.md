@@ -107,3 +107,10 @@ Please file feedback and issues over on the [Supabase GitHub org](https://github
 - [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
 - [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
 - [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+
+
+## ENV
+# Update these with your Supabase details from your project settings > API
+# https://app.supabase.com/project/_/settings/api
+NEXT_PUBLIC_SUPABASE_URL=https://kmszqzbdylforjsiuzgj.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imttc3pxemJkeWxmb3Jqc2l1emdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI2MDk5MjksImV4cCI6MjA3ODE4NTkyOX0.iNkWplzLDvd_7oJfbu7X-H5tQLboO46YESwb-9uUZIY
