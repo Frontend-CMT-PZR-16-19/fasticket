@@ -15,18 +15,40 @@ export default function Home() {
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
           <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
             <div className="flex gap-5 items-center font-semibold">
-              <Link href={"/"}>Next.js Supabase Starter</Link>
-              <div className="flex items-center gap-2">
-                <DeployButton />
+              <Link href={"/"} className="text-lg">Fasticket</Link>
+              <div className="flex items-center gap-4 text-sm font-normal">
+                <Link href="/organizations" className="hover:underline">
+                  Organizations
+                </Link>
+                <Link href="/events" className="hover:underline">
+                  Events
+                </Link>
               </div>
             </div>
             {!hasEnvVars ? <EnvVarWarning /> : <AuthButton />}
           </div>
         </nav>
         <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
-          <Hero />
+          <div className="flex flex-col items-center gap-4 text-center">
+            <h1 className="text-4xl font-bold">Welcome to Fasticket</h1>
+            <p className="text-xl text-muted-foreground max-w-2xl">
+              Discover amazing events, create organizations, and manage your tickets all in one place.
+            </p>
+            <div className="flex gap-4 mt-4">
+              <Link href="/organizations">
+                <button className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90">
+                  Browse Organizations
+                </button>
+              </Link>
+              <Link href="/events">
+                <button className="px-6 py-3 border border-foreground/20 rounded-lg font-semibold hover:bg-accent">
+                  View Events
+                </button>
+              </Link>
+            </div>
+          </div>
           <main className="flex-1 flex flex-col gap-6 px-4">
-            <h2 className="font-medium text-xl mb-4">Next steps</h2>
+            <h2 className="font-medium text-xl mb-4">Getting Started</h2>
             {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
           </main>
         </div>
