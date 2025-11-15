@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import { useState, useEffect, use } from "react";
@@ -17,6 +18,11 @@ import {
 import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+=======
+import { redirect } from "next/navigation";
+import { requireOrganizer } from "@/lib/auth/permissions";
+import { CreateEventForm } from "@/components/events/create-event-form";
+>>>>>>> 63d7dc20f9ad50b68d6e814423e7fb227884ef3e
 
 interface CreateEventPageProps {
   params: Promise<{
@@ -24,6 +30,7 @@ interface CreateEventPageProps {
   }>;
 }
 
+<<<<<<< HEAD
 export default function CreateEventPage({ params }: CreateEventPageProps) {
   const resolvedParams = use(params);
   const slug = resolvedParams.slug;
@@ -315,6 +322,26 @@ export default function CreateEventPage({ params }: CreateEventPageProps) {
           </form>
         </CardContent>
       </Card>
+=======
+export default async function CreateEventPage({ params }: CreateEventPageProps) {
+  const { slug } = await params;
+  const { organization } = await requireOrganizer(slug);
+
+  if (!organization) {
+    redirect("/organizations");
+  }
+
+  return (
+    <div className="container mx-auto py-10 px-4 max-w-3xl">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">Yeni Etkinlik Oluştur</h1>
+        <p className="text-muted-foreground">
+          {organization.name} için yeni bir etkinlik oluşturun
+        </p>
+      </div>
+
+      <CreateEventForm organizationId={organization.id} organizationSlug={slug} />
+>>>>>>> 63d7dc20f9ad50b68d6e814423e7fb227884ef3e
     </div>
   );
 }
