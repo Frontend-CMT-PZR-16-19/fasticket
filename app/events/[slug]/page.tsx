@@ -4,8 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { BookEventButton } from "@/components/bookings/book-event-button";
+import { isOrganizer } from "@/lib/auth/server-permissions";
 import Link from "next/link";
-import { Calendar, MapPin, Users, Building2, Clock } from "lucide-react";
+import { Calendar, MapPin, Users, Building2, Clock, Settings } from "lucide-react";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -60,6 +62,9 @@ export default async function EventDetailPage({ params }: PageProps) {
   const isUpcoming = startDate > now;
   const isOngoing = startDate <= now && endDate > now;
   const isPast = endDate <= now;
+
+  // Check if user is organizer of this event
+  const userIsOrganizer = user ? await isOrganizer(event.organization_id) : false;
 
   return (
     <div className="container py-10">
@@ -222,23 +227,32 @@ export default async function EventDetailPage({ params }: PageProps) {
 
                 {/* Book Button */}
                 {event.available_capacity > 0 && !isPast ? (
-                  <Button className="w-full" size="lg" disabled>
-                    Book Tickets (Coming Soon)
-                  </Button>
+                  <BookEventButton
+                    event={event}
+                    isAuthenticated={!!user}
+                  />
                 ) : isPast ? (
-                  <Button className="w-full" size="lg" disabled>
-                    Event Ended
-                  </Button>
+                  <BookEventButton
+                    event={event}
+                    isAuthenticated={!!user}
+                    disabled={true}
+                  />
                 ) : (
-                  <Button className="w-full" size="lg" variant="destructive" disabled>
-                    Sold Out
-                  </Button>
+                  <BookEventButton
+                    event={event}
+                    isAuthenticated={!!user}
+                    disabled={true}
+                  />
                 )}
 
                 {!user && event.available_capacity > 0 && !isPast && (
-                  <p className="text-xs text-center text-muted-foreground mt-2">
-                    <Link href="/auth/login" className="underline">
-                      Login
+                  <p className="text-xs text-center text-muted-foreground mt-3">
+                    <Link href="/auth/login" className="underline hover:text-primary">
+                      Sign in
+                    </Link>{" "}
+                    or{" "}
+                    <Link href="/auth/sign-up" className="underline hover:text-primary">
+                      create an account
                     </Link>{" "}
                     to book tickets
                   </p>
@@ -246,6 +260,23 @@ export default async function EventDetailPage({ params }: PageProps) {
               </div>
             </CardContent>
           </Card>
+
+          {/* Manage Bookings Button (Organizers Only) */}
+          {userIsOrganizer && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Organizer Tools</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Button asChild className="w-full">
+                  <Link href={`/events/${event.slug}/bookings`}>
+                    <Settings className="mr-2 h-4 w-4" />
+                    Manage Bookings
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Organization Card */}
           <Card>

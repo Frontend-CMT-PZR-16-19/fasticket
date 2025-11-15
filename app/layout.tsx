@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/components/providers/auth-provider";
+import { MainNavigation } from "@/components/layout/main-navigation";
+import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -11,8 +13,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Fasticket - Event Ticketing Platform",
-  description: "Discover and book amazing events",
+  title: "Fasticket - Discover Amazing Events",
+  description: "Book tickets for events near you",
 };
 
 const geistSans = Geist({
@@ -36,7 +38,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            {children}
+            <div className="flex min-h-screen flex-col">
+              <MainNavigation />
+              <main className="flex-1 mx-auto">{children}</main>
+              <Footer />
+            </div>
             <Toaster />
           </AuthProvider>
         </ThemeProvider>

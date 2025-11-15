@@ -46,13 +46,14 @@ export async function requireOrganizer(organizationId: string) {
   const user = await requireAuth();
   const supabase = await createClient();
 
+  // Direct query - RLS allows seeing own membership
   const { data, error } = await supabase
     .from('organization_members')
     .select('role')
     .eq('organization_id', organizationId)
     .eq('user_id', user.id)
     .eq('role', 'organizer')
-    .maybeSingle();
+    .single();
 
   if (error || !data) {
     redirect('/unauthorized');
@@ -72,13 +73,14 @@ export async function isOrganizer(organizationId: string): Promise<boolean> {
 
   const supabase = await createClient();
 
+  // Direct query - RLS allows seeing own membership
   const { data, error } = await supabase
     .from('organization_members')
     .select('role')
     .eq('organization_id', organizationId)
     .eq('user_id', user.id)
     .eq('role', 'organizer')
-    .maybeSingle();
+    .single();
 
   return !error && !!data;
 }

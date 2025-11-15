@@ -49,6 +49,17 @@ export default async function EventsPage({ searchParams }: PageProps) {
 
   const { data: events, error } = await query;
 
+  // Debug: Log filter and results
+  console.log("Filter:", filter);
+  console.log("Now:", now);
+  console.log("Events found:", events?.length || 0);
+  if (events && events.length > 0) {
+    console.log("First event dates:", {
+      start: events[0].start_date,
+      end: events[0].end_date,
+    });
+  }
+
   return (
     <div className="container py-10">
       <div className="flex justify-between items-center mb-8">
@@ -62,6 +73,16 @@ export default async function EventsPage({ searchParams }: PageProps) {
 
       <EventFilters currentFilter={filter} searchQuery={search} />
 
+      {/* Results Count */}
+      <div className="mb-4">
+        <p className="text-sm text-muted-foreground">
+          {events && events.length > 0
+            ? `Found ${events.length} event${events.length !== 1 ? "s" : ""}`
+            : "No events found"}
+          {search && ` matching "${search}"`}
+        </p>
+      </div>
+
       {error && (
         <div className="text-center py-10">
           <p className="text-destructive">Failed to load events</p>
@@ -70,7 +91,27 @@ export default async function EventsPage({ searchParams }: PageProps) {
 
       {!error && events && events.length === 0 && (
         <div className="text-center py-10">
-          <p className="text-muted-foreground">No events found</p>
+          <p className="text-muted-foreground text-lg mb-2">No events found</p>
+          {filter === "past" && (
+            <p className="text-sm text-muted-foreground">
+              There are no past events yet. Check back later!
+            </p>
+          )}
+          {filter === "ongoing" && (
+            <p className="text-sm text-muted-foreground">
+              There are no ongoing events right now.
+            </p>
+          )}
+          {filter === "upcoming" && (
+            <p className="text-sm text-muted-foreground">
+              No upcoming events at the moment. Check back soon!
+            </p>
+          )}
+          {search && (
+            <p className="text-sm text-muted-foreground mt-2">
+              Try different search terms
+            </p>
+          )}
         </div>
       )}
 

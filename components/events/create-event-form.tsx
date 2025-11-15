@@ -28,9 +28,7 @@ export function CreateEventForm({ organization, userId }: CreateEventFormProps) 
     slug: "",
     description: "",
     venue_name: "",
-    venue_address: "",
-    venue_city: "",
-    venue_country: "",
+    location: "",
     start_date: "",
     start_time: "",
     end_date: "",
@@ -109,14 +107,15 @@ export function CreateEventForm({ organization, userId }: CreateEventFormProps) 
           title: formData.title,
           slug: formData.slug,
           description: formData.description || null,
-          venue_name: formData.venue_name,
-          venue_address: formData.venue_address || null,
-          venue_city: formData.venue_city,
-          venue_country: formData.venue_country,
+          venue_name: formData.venue_name || null,
+          location: formData.location || null,
           start_date: startDateTime.toISOString(),
           end_date: endDateTime.toISOString(),
           total_capacity: parseInt(formData.total_capacity),
-          price: formData.isFree ? 0 : parseFloat(formData.price),
+          available_capacity: parseInt(formData.total_capacity),
+          ticket_price: formData.isFree ? 0 : parseFloat(formData.price),
+          is_free: formData.isFree,
+          status: 'draft',
           created_by: userId,
         })
         .select()
@@ -194,52 +193,29 @@ export function CreateEventForm({ organization, userId }: CreateEventFormProps) 
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="venue_name">Venue Name *</Label>
+            <Label htmlFor="venue_name">Venue Name</Label>
             <Input
               id="venue_name"
               value={formData.venue_name}
               onChange={(e) => setFormData({ ...formData, venue_name: e.target.value })}
               placeholder="e.g., Madison Square Garden"
-              required
               maxLength={200}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="venue_address">Street Address</Label>
+            <Label htmlFor="location">Full Address *</Label>
             <Input
-              id="venue_address"
-              value={formData.venue_address}
-              onChange={(e) => setFormData({ ...formData, venue_address: e.target.value })}
-              placeholder="e.g., 4 Pennsylvania Plaza"
-              maxLength={300}
+              id="location"
+              value={formData.location}
+              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              placeholder="e.g., 4 Pennsylvania Plaza, New York, NY 10001, USA"
+              required
+              maxLength={500}
             />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="venue_city">City *</Label>
-              <Input
-                id="venue_city"
-                value={formData.venue_city}
-                onChange={(e) => setFormData({ ...formData, venue_city: e.target.value })}
-                placeholder="e.g., New York"
-                required
-                maxLength={100}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="venue_country">Country *</Label>
-              <Input
-                id="venue_country"
-                value={formData.venue_country}
-                onChange={(e) => setFormData({ ...formData, venue_country: e.target.value })}
-                placeholder="e.g., United States"
-                required
-                maxLength={100}
-              />
-            </div>
+            <p className="text-xs text-muted-foreground">
+              Include street, city, state/province, and country
+            </p>
           </div>
         </CardContent>
       </Card>
