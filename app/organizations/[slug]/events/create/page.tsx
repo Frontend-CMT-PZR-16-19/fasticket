@@ -46,14 +46,16 @@ export default async function CreateEventPage({ params }: PageProps) {
     const user = await requireOrganizer(organization.id);
     
     return (
-      <div className="container max-w-4xl py-10">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Create Event</h1>
-          <p className="text-muted-foreground">
-            Create a new event for {organization.name}
-          </p>
+      <div className="w-full min-h-screen bg-gradient-to-b from-background to-muted/20">
+        <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+          <div className="mb-10 space-y-2">
+            <h1 className="text-3xl md:text-4xl font-bold">Create Event</h1>
+            <p className="text-muted-foreground text-lg">
+              Create a new event for {organization.name}
+            </p>
+          </div>
+          <CreateEventForm organization={organization} userId={user.id} />
         </div>
-        <CreateEventForm organization={organization} userId={user.id} />
       </div>
     );
   } catch {

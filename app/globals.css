@@ -4,57 +4,84 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    /* Light Mode - Turuncu & Beyaz Tema */
+    --background: 0 0% 100%; /* Beyaz */
+    --foreground: 0 0% 10%; /* Koyu gri metin */
+    
+    --card: 0 0% 100%; /* Beyaz kartlar */
+    --card-foreground: 0 0% 10%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
+    --popover-foreground: 0 0% 10%;
+    
+    --primary: 24 95% 53%; /* Turuncu (Orange-500) */
+    --primary-foreground: 0 0% 100%; /* Beyaz metin */
+    
+    --secondary: 0 0% 96%; /* Açık gri */
+    --secondary-foreground: 0 0% 10%;
+    
+    --muted: 0 0% 96%; /* Gray-100 */
+    --muted-foreground: 0 0% 45%; /* Gray-600 */
+    
+    --accent: 33 100% 50%; /* Daha açık turuncu vurgu */
+    --accent-foreground: 0 0% 10%;
+    
+    --destructive: 0 84% 60%; /* Kırmızı */
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    
+    --border: 0 0% 90%; /* Gray-400 border */
+    --input: 0 0% 90%;
+    --ring: 24 95% 53%; /* Turuncu focus ring */
+    
+    --success: 142 76% 36%; /* Yeşil */
+    --warning: 38 92% 50%; /* Sarı/Amber */
+    
+    --chart-1: 24 95% 53%;
+    --chart-2: 142 76% 36%;
+    --chart-3: 217 91% 60%;
+    --chart-4: 280 67% 65%;
+    --chart-5: 340 82% 52%;
+    
     --radius: 0.5rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
+    /* Dark Mode - Turuncu & Koyu Tema */
+    --background: 0 0% 8%; /* Koyu gri/siyah */
+    --foreground: 0 0% 98%; /* Beyaz metin */
+    
+    --card: 0 0% 12%; /* Koyu gri kartlar */
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
+    
+    --popover: 0 0% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
+    
+    --primary: 24 95% 53%; /* Turuncu (aynı) */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 0% 18%; /* Koyu gri */
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
+    
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
+    
+    --accent: 33 100% 50%; /* Parlak turuncu */
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    
+    --border: 0 0% 20%; /* Koyu border */
+    --input: 0 0% 20%;
+    --ring: 24 95% 53%; /* Turuncu focus */
+    
+    --success: 142 76% 45%;
+    --warning: 38 92% 60%;
+    
+    --chart-1: 24 95% 53%;
+    --chart-2: 142 76% 45%;
+    --chart-3: 217 91% 70%;
+    --chart-4: 280 67% 75%;
+    --chart-5: 340 82% 62%;
   }
 }
 

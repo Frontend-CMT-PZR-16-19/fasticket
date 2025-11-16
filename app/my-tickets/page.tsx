@@ -62,15 +62,16 @@ export default async function MyTicketsPage() {
   const cancelledBookings = allBookings.filter((b) => b.status === "cancelled");
 
   return (
-    <div className="container max-w-4xl py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">My Tickets</h1>
-        <p className="text-muted-foreground">
-          View and manage your event tickets
-        </p>
-      </div>
+    <div className="w-full min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div className="mb-10 space-y-2">
+          <h1 className="text-3xl md:text-4xl font-bold">My Tickets</h1>
+          <p className="text-muted-foreground text-lg">
+            View and manage your event tickets
+          </p>
+        </div>
 
-      <Tabs defaultValue="upcoming" className="space-y-6">
+        <Tabs defaultValue="upcoming" className="space-y-8">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="upcoming">
             Upcoming ({upcomingBookings.length})
@@ -117,6 +118,7 @@ export default async function MyTicketsPage() {
           )}
         </TabsContent>
       </Tabs>
+      </div>
     </div>
   );
 }

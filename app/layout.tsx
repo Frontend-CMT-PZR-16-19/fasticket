@@ -40,7 +40,7 @@ export default function RootLayout({
           <AuthProvider>
             <div className="flex min-h-screen flex-col">
               <MainNavigation />
-              <main className="flex-1 mx-auto">{children}</main>
+              <main className="flex-1 w-full">{children}</main>
               <Footer />
             </div>
             <Toaster />

@@ -38,28 +38,30 @@ export function MainNavigation() {
   };
 
   return (
-    <header className="border-b">
-      <div className="container flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
+      <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <div className="flex items-center gap-8">
-          <Link href="/" className="text-2xl font-bold">
-            Fasticket
+          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-primary to-amber-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+            🎟️ Fasticket
           </Link>
 
           {/* Main Nav Links */}
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/events"
-              className="text-sm font-medium transition-colors hover:text-primary"
+              className="text-sm font-medium transition-colors hover:text-primary relative group"
             >
               Events
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
             </Link>
             {user && (
               <Link
                 href="/my-tickets"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-sm font-medium transition-colors hover:text-primary relative group"
               >
                 My Tickets
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
               </Link>
             )}
           </nav>

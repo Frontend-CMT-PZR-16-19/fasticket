@@ -67,8 +67,9 @@ export default async function EventDetailPage({ params }: PageProps) {
   const userIsOrganizer = user ? await isOrganizer(event.organization_id) : false;
 
   return (
-    <div className="container py-10">
-      <div className="grid lg:grid-cols-3 gap-8">
+    <div className="w-full min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           {/* Cover Image */}
@@ -301,6 +302,7 @@ export default async function EventDetailPage({ params }: PageProps) {
             </CardContent>
           </Card>
         </div>
+      </div>
       </div>
     </div>
   );

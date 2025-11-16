@@ -71,10 +71,16 @@ export default async function OrganizationManagePage({ params }: PageProps) {
     .order("start_date", { ascending: false });
 
   return (
-    <div className="container max-w-6xl py-10">
-      <h1 className="text-3xl font-bold mb-6">Manage {organization.name}</h1>
+    <div className="w-full min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div className="mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold">Manage {organization.name}</h1>
+          <p className="text-muted-foreground text-lg mt-2">
+            Manage your organization's settings, members, and events
+          </p>
+        </div>
 
-      <Tabs defaultValue="members" className="space-y-6">
+        <Tabs defaultValue="members" className="space-y-8">
         <TabsList>
           <TabsTrigger value="members">Members</TabsTrigger>
           <TabsTrigger value="events">Events</TabsTrigger>
@@ -99,6 +105,7 @@ export default async function OrganizationManagePage({ params }: PageProps) {
           <OrganizationSettingsTab organization={organization} />
         </TabsContent>
       </Tabs>
+      </div>
     </div>
   );
 }

@@ -22,8 +22,14 @@ export default async function EditProfilePage() {
     .single();
 
   return (
-    <div className="container py-10">
-      <div className="max-w-2xl mx-auto">
+    <div className="w-full min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div className="mb-10 space-y-2">
+          <h1 className="text-3xl md:text-4xl font-bold">Edit Profile</h1>
+          <p className="text-muted-foreground text-lg">
+            Update your profile information
+          </p>
+        </div>
         <EditProfileForm
           initialData={{
             fullname: profile?.fullname || "",

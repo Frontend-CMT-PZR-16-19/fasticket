@@ -73,7 +73,7 @@ export default async function EventBookingsPage({ params }: PageProps) {
   const totalRevenue = confirmedBookings.reduce((sum, b) => sum + b.total_price, 0);
 
   return (
-    <div className="container max-w-6xl py-10">
+    <div className="container max-w-6xl mx-auto py-10">
       {/* Header */}
       <div className="mb-8">
         <Link

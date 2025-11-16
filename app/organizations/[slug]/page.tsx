@@ -53,15 +53,30 @@ export default async function OrganizationPage({ params }: PageProps) {
     notFound();
   }
 
-  // Get upcoming events
-  const { data: upcomingEvents } = await supabase
+  // Get upcoming events - temporarily remove status filter for debugging
+  const { data: upcomingEvents, error: eventsError } = await supabase
     .from("events")
     .select("*")
     .eq("organization_id", organization.id)
-    .eq("status", "published")
+    // .eq("status", "published")  // Temporarily commented for debugging
     .gte("start_date", new Date().toISOString())
     .order("start_date", { ascending: true })
     .limit(6);
+
+  // Debug logging
+  console.log("=== Organization Events Debug ===");
+  console.log("Organization ID:", organization.id);
+  console.log("Current time:", new Date().toISOString());
+  console.log("Events error:", eventsError);
+  console.log("Events found:", upcomingEvents?.length || 0);
+  if (upcomingEvents && upcomingEvents.length > 0) {
+    console.log("Sample event:", {
+      title: upcomingEvents[0].title,
+      status: upcomingEvents[0].status,
+      start_date: upcomingEvents[0].start_date,
+      is_future: new Date(upcomingEvents[0].start_date) > new Date(),
+    });
+  }
 
   // Get member count
   const { count: memberCount } = await supabase
@@ -73,30 +88,31 @@ export default async function OrganizationPage({ params }: PageProps) {
   const userIsOrganizer = user ? await isOrganizer(organization.id) : false;
 
   return (
-    <div className="container py-10">
-      {/* Header */}
-      <div className="flex items-start justify-between mb-8">
-        <div className="flex-1">
-          <h1 className="text-4xl font-bold mb-2">{organization.name}</h1>
-          {organization.description && (
-            <p className="text-lg text-muted-foreground max-w-3xl">
-              {organization.description}
-            </p>
-          )}
-          <div className="flex items-center gap-4 mt-4">
-            <Badge variant="secondary" className="flex items-center gap-1">
-              <Users className="h-3 w-3" />
-              {memberCount} {memberCount === 1 ? "Member" : "Members"}
-            </Badge>
-            <Badge variant="secondary" className="flex items-center gap-1">
-              <Calendar className="h-3 w-3" />
-              {upcomingEvents?.length || 0} Upcoming Events
-            </Badge>
+    <div className="w-full min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-6 mb-10">
+          <div className="flex-1 space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold">{organization.name}</h1>
+            {organization.description && (
+              <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
+                {organization.description}
+              </p>
+            )}
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge variant="secondary" className="flex items-center gap-1.5">
+                <Users className="h-3.5 w-3.5" />
+                {memberCount} {memberCount === 1 ? "Member" : "Members"}
+              </Badge>
+              <Badge variant="secondary" className="flex items-center gap-1.5">
+                <Calendar className="h-3.5 w-3.5" />
+                {upcomingEvents?.length || 0} Upcoming Events
+              </Badge>
+            </div>
           </div>
-        </div>
-        {userIsOrganizer && (
-          <Button asChild>
-            <Link href={`/organizations/${slug}/manage`}>
+          {userIsOrganizer && (
+            <Button asChild size="lg">
+              <Link href={`/organizations/${slug}/manage`}>
               Manage Organization
             </Link>
           </Button>
@@ -163,6 +179,7 @@ export default async function OrganizationPage({ params }: PageProps) {
           )}
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }
